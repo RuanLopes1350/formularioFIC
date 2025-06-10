@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario FIC</title>
+</head>
+
+<body>
+
+  <header>
+    <h1>Inscrição nos cursos FIC</h1>
+    <p>Prazo para responder: 05/05/2025</p>
+  </header>
+
+  <div class="nameBox">
+    <label for="name">Nome:</label>
+    <input type="text" id="name" placeholder="Ex: João da Silva" />
+  </div>
+
+  <div class="emailBox">
+    <label for="email">E-mail:</label>
+    <input type="email" id="email" placeholder="Ex: joao@email.com" />
+  </div>
+
+  <div class="genderBox">
+    <input type="radio" name="gender" id="male">
+    <label for="gender">Masculino</label>
+    <input type="radio" name="gender" id="female">
+    <label for="gender">Feminino</label>
+  </div>
+
+  <div class="courseBox">
+    <label for="course">Curso:</label>
+    <select id="course">
+      <option value="null" disabled selected>Selecione um curso</option>
+      <option value="programacao">Programação</option>
+      <option value="design">Design</option>
+      <option value="marketing">Marketing Digital</option>
+      <option value="gestao">Gestão de Projetos</option>
+    </select>
+  </div>
+
+  <div class="observationsBox">
+    <label for="observations">Descreva o atendimento especial (opcional):</label>
+    <textarea id="observations" placeholder=""></textarea>
+  </div>
+
+  <div class="termsBox">
+    <input type="checkbox" id="terms">
+    <label for="terms">Estou de acordo com os termos de serviço</label>
+    <span class="checkMark"></span>
+  </div>
+
+  <p>Os campos marcados com * são obrigatórios</p>
+
+  <button id="submitButton">Realizar inscrição</button>
+
+  <div id="app"></div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

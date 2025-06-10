@@ -1,0 +1,50 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+header {
+    width: 832px;
+    height: 144px;
+    background: rgba(241, 241, 241, 0.6);
+    border-radius: 8px;
+}
+
+.nameBox {
+    border-left: 8px solid rgba(40, 107, 185, 1);
+    width: 832px;
+    height: 106px;
+}
+
+.emailBox {
+    border-left: 8px solid rgba(40, 107, 185, 1);
+    width: 832px;
+    height: 106px;
+}
+
+.genderBox {
+    border-left: 8px solid rgba(40, 107, 185, 1);
+    width: 832px;
+    height: 89px;
+}
+
+.courseBox {
+    border-left: 8px solid rgba(40, 107, 185, 1);
+    width: 832px;
+    height: 106px;
+}
+
+.observationsBox {
+    border-left: 8px solid rgba(40, 107, 185, 1);
+    width: 832px;
+    height: 156px;
+}
+
+.termsBox {
+    border-left: 8px solid rgba(40, 107, 185, 1);
+    width: 832px;
+    height: 66px;
+}

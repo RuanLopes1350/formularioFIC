@@ -1,0 +1,20 @@
+{
+  "name": "formulario-fic",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "json": "json-server json-server.json dados.json"
+  },
+  "devDependencies": {
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3",
+    "zod": "^3.25.56"
+  }
+}
