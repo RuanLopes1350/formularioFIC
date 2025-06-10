@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "json": "json-server json-server.json dados.json"
+    "json": "json-server json-server.json data.json"
   },
   "devDependencies": {
     "typescript": "~5.8.3",
