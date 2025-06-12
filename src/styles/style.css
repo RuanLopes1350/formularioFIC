@@ -1,50 +1,150 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --cor-texto: rgba(32, 33, 36, 1);
+    --cor-fundo: rgba(240, 244, 248, 1);
+    --cor-destaque: rgba(255, 255, 255, 0.5);
+    --cor-superficie: rgba(223, 223, 223, 0.05);
+    --cor-cartoes: rgba(255, 255, 255, 1);
+    --sombra-cartoes: rgba(0, 0, 0, 0.1);
+    --cor-borda: #286BB9;
+}
+
 body {
+    background-color: var(--cor-fundo);
+    font-family: "Quicksand", sans-serif;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 16px;
+    align-items: center;
+    padding: 40px;
+    color: var(--cor-texto);
 }
 
 header {
-    width: 832px;
-    height: 144px;
-    background: rgba(241, 241, 241, 0.6);
+    width: 100%;
+    max-width: 832px;
+    text-align: center;
+    margin-bottom: 20px;
+    background: #F1F1F199;
+    color: #ffffff;
+    padding: 25px 0;
     border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.nameBox {
-    border-left: 8px solid rgba(40, 107, 185, 1);
-    width: 832px;
-    height: 106px;
+header h1 {
+    margin-bottom: 10px;
 }
 
-.emailBox {
-    border-left: 8px solid rgba(40, 107, 185, 1);
+.nameBox, .emailBox, .genderBox, .courseBox, .observationsBox, .termsBox {
+    background-color: var(--cor-cartoes);
+    border-left: 8px solid var(--cor-borda);
+    border-radius: 8px;
+    box-shadow: 0 1px 4px var(--sombra-cartoes);
     width: 832px;
-    height: 106px;
+    padding: 20px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.genderBox {
-    border-left: 8px solid rgba(40, 107, 185, 1);
-    width: 832px;
-    height: 89px;
-}
-
-.courseBox {
-    border-left: 8px solid rgba(40, 107, 185, 1);
-    width: 832px;
-    height: 106px;
+.nameBox, .emailBox, .genderBox, .courseBox, .termsBox {
+    height: auto;
+    min-height: 106px;
 }
 
 .observationsBox {
-    border-left: 8px solid rgba(40, 107, 185, 1);
-    width: 832px;
-    height: 156px;
+    height: auto;
+    min-height: 156px;
+}
+
+label {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #989898;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: var(--cor-fundo);
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border: 2px solid #636262;
+    box-shadow: 0 0 0 2px rgba(40, 107, 185, 0.2);
+    outline: none;
+}
+
+textarea {
+    resize: none;
+    min-height: 100px;
+}
+
+.options-container {
+    display: flex;
+    gap: 20px;
+}
+
+.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.campoObrigatorio::after {
+    content: "*";
+    color: #ff0000;
+    padding: 0 3px;
 }
 
 .termsBox {
-    border-left: 8px solid rgba(40, 107, 185, 1);
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+p {
+    margin: 10px 0 20px;
+    font-size: 14px;
+}
+
+#submitButton {
+    background-color: var(--cor-borda);
+    color: #ffffff;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
     width: 832px;
-    height: 66px;
+    margin-top: 20px;
+}
+
+#submitButton:hover {
+    background-color: rgb(20, 82, 152);
+}
+
+/* Responsividade */
+@media (max-width: 860px) {
+    .nameBox, .emailBox, .genderBox, .courseBox, .observationsBox, .termsBox, header, #submitButton {
+        width: 95%;
+    }
 }
