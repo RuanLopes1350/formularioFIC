@@ -1,8 +1,7 @@
 import './styles/globalReset.css'
 import './styles/style.css'
-import './validations/formSchema.ts'
 import { z } from 'zod';
-import { userSchema } from './validations/formSchema.ts'
+import { userSchema, type UserData } from './validations/formSchema.ts'
 
 const nome = document.querySelector<HTMLInputElement>('#name')!
 const email = document.querySelector<HTMLInputElement>('#email')!
@@ -12,12 +11,19 @@ const curso = document.querySelector<HTMLSelectElement>('#course')!
 const observacoes = document.querySelector<HTMLTextAreaElement>('#observations')!
 const termos = document.querySelector<HTMLInputElement>('#terms')!
 const submitButton = document.querySelector<HTMLButtonElement>('#submitButton')!
+const switchTheme = document.querySelector('#switch')!
 
-function validarDados(nome: string, email: string) {
+function toggleMode() {
+    const html = document.documentElement;
+    html.classList.toggle("dark");
+}
+
+(window as any).toogleMode = toggleMode;
+(window as any).toggleMode = toggleMode;
+
+function validarDados(dados: any): dados is UserData {
     try {
-        const nomeValido = userSchema.shape.name?.parse(nome);
-        const emailValido = userSchema.shape.email?.parse(email);
-
+        userSchema.parse(dados);
         return true;
     } catch (erro) {
         if (erro instanceof z.ZodError) {
@@ -32,7 +38,7 @@ function validarDados(nome: string, email: string) {
                 details: erros
             };
             console.error(erroFormatado);
-            alert(`Erro de validação: ${JSON.stringify(erroFormatado.details.map(e => e.mensagem).join(', '))}`);
+            alert(`Erro de validação: ${erros.map(e => e.mensagem).join('\n')}`);
             return false;
         }
 
@@ -41,8 +47,11 @@ function validarDados(nome: string, email: string) {
     }
 }
 
-async function enviarDadosParaServer(dados: any) {
+async function enviarDadosParaServer(dados: UserData) {
     try {
+        // log para depuração
+        console.log('Enviando dados para:', 'http://localhost:3000/users', dados);
+
         const response = await fetch('http://localhost:3000/users', {
             method: 'POST',
             headers: {
@@ -52,6 +61,9 @@ async function enviarDadosParaServer(dados: any) {
         });
 
         if (!response.ok) {
+            console.error(`Erro na resposta: Status ${response.status}`);
+            const errorText = await response.text();
+            console.error(`Resposta de erro: ${errorText}`);
             throw new Error(`Erro ao enviar dados: ${response.statusText}`);
         }
 
@@ -59,7 +71,7 @@ async function enviarDadosParaServer(dados: any) {
         console.log('Dados salvos com sucesso:', dadosSalvos);
         return true;
     } catch (erro) {
-        console.error('Erro ao enviar dados:', erro);
+        console.error('Erro detalhado:', erro);
         alert(`Erro ao enviar dados: ${erro}`);
         return false;
     }
@@ -68,44 +80,42 @@ async function enviarDadosParaServer(dados: any) {
 submitButton.addEventListener("click", async (event) => {
     event.preventDefault();
 
-    const nomeUser = nome.value;
-    const emailUser = email.value;
+    const nomeUser = nome.value.trim();
+    const emailUser = email.value.trim();
     const generoUser = generoMasculino.checked ? 'masculino' : (generoFeminino.checked ? 'feminino' : '');
-    const cursoUser = curso.value;
-    const observacoesUser = observacoes.value;
+    const cursoUser = curso.value !== '' ? curso.value : '';
+    const observacoesUser = observacoes.value.trim();
     const termosUser = termos.checked;
 
-    if (!nomeUser || !emailUser || !generoUser || !termosUser) {
-        alert('Por favor, preencha todos os campos obrigatórios e aceite os termos.');
-        return;
-    }
-
-    if (!validarDados(nomeUser, emailUser)) {
-        return;
-    }
-
     const dados = {
-        nome: nomeUser,
+        name: nomeUser,
         email: emailUser,
-        genero: generoUser,
-        curso: cursoUser,
-        observacoes: observacoesUser,
-        termos: termosUser
+        gender: generoUser,
+        course: cursoUser,
+        observations: observacoesUser,
+        terms: termosUser
     }
-    console.log(dados);
+
+    if (!validarDados(dados)) {
+        return;
+    }
+
+    console.log('Dados válidos:', dados);
 
     const sucesso = await enviarDadosParaServer(dados);
 
     if (sucesso) {
         alert('Formulário enviado com sucesso!');
 
+        // Limpar o formulário
         nome.value = '';
         email.value = '';
         generoMasculino.checked = false;
         generoFeminino.checked = false;
-        curso.value = '';
+        curso.value = ''; // Changed from 'null' to empty string
         observacoes.value = '';
         termos.checked = false;
-
     }
-})
+});
+
+switchTheme.addEventListener('click', toggleMode);

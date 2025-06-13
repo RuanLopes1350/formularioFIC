@@ -11,18 +11,24 @@
 <body>
 
   <header>
+  <div class="header-content">
     <h1>Inscrição nos cursos FIC</h1>
     <p>Prazo para responder: 05/05/2025</p>
-  </header>
+  </div>
+  <div id="switch">
+    <button></button>
+    <span></span>
+  </div>
+</header>
 
   <div class="nameBox">
     <label for="name">Nome:</label>
-    <input type="text" id="name" placeholder="Ex: João da Silva" />
+    <input type="text" id="name" required placeholder="Ex: João da Silva" />
   </div>
 
   <div class="emailBox">
     <label for="email" class="campoObrigatorio">E-mail:</label>
-    <input type="email" id="email" placeholder="Ex: joao@email.com" />
+    <input type="email" id="email" required placeholder="Ex: joao@email.com" />
   </div>
 
   <div class="genderBox">
@@ -41,12 +47,11 @@
 
   <div class="courseBox">
     <label for="course" class="campoObrigatorio">Curso:</label>
-    <select id="course">
-      <option value="null" disabled selected>Selecione um curso</option>
-      <option value="programacao">Programação</option>
-      <option value="design">Design</option>
-      <option value="marketing">Marketing Digital</option>
-      <option value="gestao">Gestão de Projetos</option>
+    <select id="course" required>
+      <option value="" disabled selected>Selecione um curso</option>
+      <option value="espanhol">Espanhol</option>
+      <option value="costura">Costura</option>
+      <option value="placasolar">Instalação de Placas Solares</option>
     </select>
   </div>
 

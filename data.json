@@ -1,3 +1,13 @@
 {
-    "users": []
+  "users": [
+    {
+      "id": "327e",
+      "name": "John Doe",
+      "email": "johndoe@email.com",
+      "gender": "masculino",
+      "course": "placasolar",
+      "observations": "",
+      "terms": true
+    }
+  ]
 }

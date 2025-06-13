@@ -1,17 +1,21 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 :root {
-    --cor-texto: rgba(32, 33, 36, 1);
-    --cor-fundo: rgba(240, 244, 248, 1);
+    --cor-texto: rgba(72, 73, 70, 1);
+    --cor-fundo: rgba(255, 255, 255, 1);
     --cor-destaque: rgba(255, 255, 255, 0.5);
     --cor-superficie: rgba(223, 223, 223, 0.05);
-    --cor-cartoes: rgba(255, 255, 255, 1);
-    --sombra-cartoes: rgba(0, 0, 0, 0.1);
+    --cor-box: rgba(240, 244, 248, 1);
+    --sombra-box: rgba(0, 0, 0, 0.1);
     --cor-borda: #286BB9;
+}
+
+html.dark {
+    --cor-texto: rgba(230, 230, 230, 1);
+    --cor-fundo: rgba(30, 32, 36, 1);
+    --cor-destaque: rgba(50, 50, 50, 0.5);
+    --cor-superficie: rgba(40, 40, 40, 0.05);
+    --cor-box: rgba(45, 47, 51, 1);
+    --sombra-box: rgba(0, 0, 0, 0.3);
+    --cor-borda: #5d9de6;
 }
 
 body {
@@ -26,26 +30,77 @@ body {
 }
 
 header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     max-width: 832px;
-    text-align: center;
+    text-align: left;
     margin-bottom: 20px;
     background: #F1F1F199;
-    color: #ffffff;
-    padding: 25px 0;
-    border-radius: 8px;
+    color: var(--cor-texto);
+    padding: 25px;
+    border-radius: 0 8px 8px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 header h1 {
     margin-bottom: 10px;
 }
 
-.nameBox, .emailBox, .genderBox, .courseBox, .observationsBox, .termsBox {
-    background-color: var(--cor-cartoes);
+#switch {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background: var(--cor-destaque);
+    border-radius: 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+}
+
+#switch button {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--cor-borda);
+    border: 0;
+    position: absolute;
+    transition: all 0.2s ease-in-out;
+    left: 5px;
+    z-index: 1;
+    cursor: pointer;
+}
+
+html.dark #switch button {
+    left: 31px;
+}
+
+#switch span {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.nameBox,
+.emailBox,
+.genderBox,
+.courseBox,
+.observationsBox,
+.termsBox {
+    background-color: var(--cor-box);
     border-left: 8px solid var(--cor-borda);
-    border-radius: 8px;
-    box-shadow: 0 1px 4px var(--sombra-cartoes);
+    border-radius: 0 8px 8px 0;
+    box-shadow: 0 1px 4px var(--sombra-box);
     width: 832px;
     padding: 20px;
     margin-bottom: 16px;
@@ -54,7 +109,11 @@ header h1 {
     gap: 10px;
 }
 
-.nameBox, .emailBox, .genderBox, .courseBox, .termsBox {
+.nameBox,
+.emailBox,
+.genderBox,
+.courseBox,
+.termsBox {
     height: auto;
     min-height: 106px;
 }
@@ -80,6 +139,7 @@ textarea {
     border-radius: 6px;
     font-size: 14px;
     background-color: var(--cor-fundo);
+    color: var(--cor-texto);
     transition: border 0.2s, box-shadow 0.2s;
 }
 
@@ -107,7 +167,7 @@ textarea {
     gap: 5px;
 }
 
-.campoObrigatorio::after {
+.campoObrigatorio::before {
     content: "*";
     color: #ff0000;
     padding: 0 3px;
@@ -122,6 +182,7 @@ textarea {
 p {
     margin: 10px 0 20px;
     font-size: 14px;
+    font-weight: 600;
 }
 
 #submitButton {
@@ -144,7 +205,15 @@ p {
 
 /* Responsividade */
 @media (max-width: 860px) {
-    .nameBox, .emailBox, .genderBox, .courseBox, .observationsBox, .termsBox, header, #submitButton {
+
+    .nameBox,
+    .emailBox,
+    .genderBox,
+    .courseBox,
+    .observationsBox,
+    .termsBox,
+    header,
+    #submitButton {
         width: 95%;
     }
 }
